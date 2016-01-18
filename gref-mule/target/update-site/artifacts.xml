@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='file:/Users/arpansakala/AnypointStudio/workspace/gref-mule/target/update-site/ - artifacts' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1453125834682'/>
+    <property name='p2.compressed' value='false'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='2'>
+    <artifact classifier='org.eclipse.update.feature' id='org.mule.tooling.ui.extension.gref-mule.3.5.0' version='1.0.0.201601181403'>
+      <properties size='4'>
+        <property name='artifact.size' value='641'/>
+        <property name='download.size' value='641'/>
+        <property name='download.md5' value='1903df3f159fd57e60ae6279a60be29b'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mule.tooling.ui.contribution.gref.3.5.0' version='1.0.0.201601181403'>
+      <properties size='3'>
+        <property name='artifact.size' value='2063555'/>
+        <property name='download.size' value='2063555'/>
+        <property name='download.md5' value='56059811305c68bcdb6a4ac120562abf'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>

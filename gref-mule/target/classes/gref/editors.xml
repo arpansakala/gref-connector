@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/gref" prefix="gref">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Gref" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Gref: Configuration" description="Global Configuration configuration information." icon="icons/small/gref-connector-24x16.png" localId="config" image="icons/large/gref-connector-48x32.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/gref/parentConfig" connectivityTesting="off" metaData="static" metaDataKeyDisplay="DISPLAY_NAME" supportsUserDefinedMetaData="false">
+    <attribute-category caption="General" description="Gref configuration properties.">
+      <group id="grefGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <string defaultValue="localhost" name="host" caption="Host" description="" supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="9494" name="port" caption="Port" description="" supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractgrefconnectorgeneric" description="Interact with Gref." icon="icons/small/gref-connector-24x16.png" localId="abstractGrefConnectorGeneric" image="icons/large/gref-connector-48x32.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractGrefConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/gref/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.gref" caption="Gref" description="" icon="icons/small/gref-connector-24x16.png" localId="gref-connector" image="icons/large/gref-connector-48x32.png" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="grefConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Gref operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gref/create-canonical-object" modeLabel="Create canonical object"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gref/get-canonical-id" modeLabel="Get canonical id"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gref/get-canonical-object" modeLabel="Get canonical object"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gref/modify-canonical-object" modeLabel="Modify canonical object"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.modules.gref.entities.GrefInfo" caption="Create Canonical Object" icon="icons/small/gref-connector-24x16.png" localId="create-canonical-object" image="icons/large/gref-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="objectName" caption="Object Name" description="Object name e.g. product, feature etc." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystem" caption="Source System" description="Name of the source system whose ID is being passed." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystemId" caption="Source System Id" description="Source system ID of the object." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.modules.gref.entities.GrefInfo" caption="Get Canonical Id" icon="icons/small/gref-connector-24x16.png" localId="get-canonical-id" image="icons/large/gref-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="objectName" caption="Object Name" description="Object name e.g. product, feature etc." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystem" caption="Source System" description="Name of the source system whose ID is being passed." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystemId" caption="Source System Id" description="Source system ID of the object." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.List&lt;org.mule.modules.gref.entities.GrefInfo&gt;" caption="Get Canonical Object" icon="icons/small/gref-connector-24x16.png" localId="get-canonical-object" image="icons/large/gref-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="canonicalId" caption="Canonical Id" description="Canonical ID for the given object e.g. b4f669e7-7c5e-420c-9f26-5f06318955a1." required="true" javaType="java.lang.String"></string>
+        <string name="objectName" caption="Object Name" description="Object name e.g. product, feature etc." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.modules.gref.entities.GrefInfo" caption="Modify Canonical Object" icon="icons/small/gref-connector-24x16.png" localId="modify-canonical-object" image="icons/large/gref-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gref/abstractGrefConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="canonicalId" caption="Canonical Id" description="Canonical ID for the given object e.g. b4f669e7-7c5e-420c-9f26-5f06318955a1." required="true" javaType="java.lang.String"></string>
+        <string name="objectName" caption="Object Name" description="Object name e.g. product, feature etc." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystem" caption="Source System" description="Name of the source system whose ID is being passed." required="true" javaType="java.lang.String"></string>
+        <string name="sourceSystemId" caption="Source System Id" description="Source system ID of the object." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>
