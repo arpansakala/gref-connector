@@ -59,7 +59,21 @@ public class GrefConnector {
 	@Processor
 	public List<GrefInfo> getCanonicalObject(String objectName, String canonicalId)
 			throws GrefConnectorAccessDeniedException, GrefConnectorException {
-		return getClient().getCanonicalObject(objectName, canonicalId);
+		return getClient().getCanonicalObjectList(objectName, canonicalId);
+	}
+	
+	/**
+     * Get System Details given its canonical ID
+     * @param canonicalId Canonical ID for the given object e.g. b4f669e7-7c5e-420c-9f26-5f06318955a1
+     * @param objectName Object name e.g. product, feature etc.
+     * @param systemName 
+     * @return System details (GrefInfo POJO)
+     * @throws Gref custom exceptions
+     */
+	@Processor
+	public GrefInfo getSystemDetailsForCanonicalId(String objectName, String canonicalId, String systemName) 
+			throws GrefConnectorAccessDeniedException, GrefConnectorException {
+		return getClient().getCanonicalObject(objectName, canonicalId, systemName);
 	}
 
 	/**

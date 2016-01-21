@@ -3,6 +3,7 @@
  */
 package org.mule.modules.gref.client;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -70,13 +71,38 @@ public class GrefClient {
 	}
 	
 	/**
+     * Client method - Get System Details given its canonical ID
+     * @param canonicalId Canonical ID for the given object e.g. b4f669e7-7c5e-420c-9f26-5f06318955a1
+     * @param objectName Object name e.g. product, feature etc.
+     * @param systemName 
+     * @return System details (GrefInfo POJO)
+     * @throws Gref custom exceptions
+     */
+	public GrefInfo getCanonicalObject(String objectName, String canonicalId, String systemName) 
+			throws GrefConnectorAccessDeniedException, GrefConnectorException {
+
+		List<GrefInfo> grefInfoList = getCanonicalObjectList(objectName, canonicalId);
+		
+		Iterator<GrefInfo> grefInfoIterator = grefInfoList.iterator();	
+		while (grefInfoIterator.hasNext())
+		{
+			GrefInfo grefInfo = grefInfoIterator.next();
+			if (systemName.equalsIgnoreCase(grefInfo.getSource())) {
+				return grefInfo;
+			}	
+		}
+		throw new GrefConnectorException(
+				String.format("ERROR - statusCode: 401 - message: canonical object not "
+						+ "found for the system : %s given canonical ID : %s", systemName, canonicalId));
+	}
+	/**
      * Client method - Get Canonical Object(GrefInfo POJO) given its canonical ID
      * @param canonicalId Canonical ID for the given object e.g. b4f669e7-7c5e-420c-9f26-5f06318955a1
      * @param objectName Object name e.g. product, feature etc.
      * @return Canonical object (GrefInfo POJO)
      * @throws Gref custom exceptions
      */
-	public List<GrefInfo> getCanonicalObject(String objectName, String canonicalId)
+	public List<GrefInfo> getCanonicalObjectList(String objectName, String canonicalId)
 			throws GrefConnectorAccessDeniedException, GrefConnectorException {
 		WebResource webResource = getApiResource().path("objects").path(objectName).path(canonicalId);
 		return execute(webResource);
@@ -177,7 +203,7 @@ public class GrefClient {
 			throw new GrefConnectorAccessDeniedException("Unauthorised access" + clientResponse.getEntity(String.class));
 		}else {
 			throw new GrefConnectorException(
-					String.format("ERROR - statusCode: %d - message: %s",
+					String.format("ERROR - statusCode: 404 - message: %s",
                             clientResponse.getStatus(), clientResponse.getEntity(String.class)));
 		}
 	}
